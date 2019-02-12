@@ -1,0 +1,96 @@
+0.25.9 XXX
+
+ + --hide-machine-names
+ + use po4a to manage manpage translations.
+
+0.25.8 18 May 2007
+
+ + fix forklimit config file option.
+
+0.25.7 11 Aug 2006
+
+ + use \- instead of - on some parts of manual page.
+
+0.25.6 8 April 2005.
+
+ + Really fix compilation error on solaris, really include signal.h.
+
+0.25.5 16 Mar 2005.
+
+ + Fix copyright year for 2004.
+ + Machine-list ordering fix; it used to be in reverse-order, but it is now in
+   specified order
+
+0.25.4 3 Dec 2004.
+
+ + Fix compilation error on solaris, include signal.h
+ + fix copyright year, and remove obsolete mail address.
+
+0.25.3 - 6 Jun 2004.
+
+ + add spec file
+ + Support # comments in machine list file.
+
+0.25.2.1 - 25 Apr 2004.
+
+ + Re-dist due to automake1.8 doing --posix option.
+   The archive was incompatible with some 'tar' versions.
+
+0.25.2 - 20 Apr 2004.
+
+ + Document -ic problem in the manual page.
+   debugging and re-implementation will happen later.
+
+0.25.1 - 22 Jan 2004.
+
+ + Fix hangling of SIGPIPE when remote process is finished before
+   local noticing, with -ci option.
+ - Exiting remote shell session with 'exit' will pause the process,
+   until next input is done.
+   It will emit "Process terminated (before write)." message.
+
+0.25.0 - 17 Sep 2003.
+
+ + Add fork limit feature; so that a limited number of connection are 
+   utilized for -c option.
+
+0.24.2 - 26 Aug 2003.
+
+ + Add check for the alleged security hole (HOME environment variable buffer overflow).
+   run "make check" to run the check: test-bufferoverflow.
+
+0.24.0 - 5 Aug 2003.
+
+ + Support NetBSD 1.6. 
+ + check for netgroup.h for setnetgrent.
+
+0.23.12 - 26 Jul 2003.
+
+ + Support Tru64 UNIX. Two testsuits fail due to shell features, but it works.
+ + Support HP-UX
+
+0.23.11 - 12 Jun 2003.
+
+ + check for libdshconfig.h before compiling
+   thanks to Tomo Hiroyasu <tomo@is.doshisha.ac.jp>
+ + doc++ documentation fixes.
+ + fix compile error on SunOS.
+   thanks to Tomo Hiroyasu <tomo@is.doshisha.ac.jp>
+ + check for setnetgrent before using, should fix build on cygwin.
+   thanks to Tomo Hiroyasu <tomo@is.doshisha.ac.jp>
+
+0.23.9 - 7 Jun 2003.
+
+ + really include .ja manpages
+ + review and improve manual page wordings
+ + install .ja manpages through the build process.
+ + exit code of dsh is determined by exit code of child process,
+   the first non-zero exit code is used.
+
+0.23.7 - 29 May 2003
+
+ ! fixed dsh.1 manpage
+ + added dsh.conf.5 manpage
+ + added dsh.ja.1 manpage
+ + added dsh.conf.ja.5 manpage
+ + updated ja.po

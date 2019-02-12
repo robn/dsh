@@ -1,0 +1,1172 @@
+2007-08-15  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.1.ja.po: new file
+
+	* Makefile.am (dsh.1.ja.po): makefile.
+
+	* parameter.c: hide-machine-names
+
+	* dsh.ja.1: document
+
+	* dsh.1: document.
+
+	* dsh.spec: add contributed spec file.
+
+2007-05-18  Junichi Uekawa  <dancer@debian.org>
+
+	* Makefile.am (upload-dist-all): change from viper to aegis.
+
+	* parameter.c: fix forklimit parameter option thinko.
+
+2006-08-11  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.25.7
+
+2005-07-10  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.1: updated manual page to use \- rather than - in places.
+
+2005-04-08  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.25.6
+
+	* dsh.c: move around signal.h inclusion
+	  to really fix solaris build failure.
+	HAVE_SIGNAL_H should be used after config.h is read.
+
+2005-03-16  Junichi Uekawa  <dancer@debian.org>
+
+	* tests/param-f-with-space.sh (d): updated test
+
+	* tests/param-f.sh: updated test
+
+	* tests/param-cn4.sh: updated test
+
+	* tests/param-m.sh): updated test
+
+	* parameter.c (parse_options): reverse the list to make proper 
+	order for machinelist
+
+	* debian/copyright (Copyright): update
+
+	* NEWS: update
+
+	* configure.ac: 0.25.4.cvs.2
+
+	* Makefile.am: add new test
+
+	* tests/machinelist-order.sh: new test
+
+2005-03-12  Junichi Uekawa  <dancer@debian.org>
+
+	* TODO: solaris compilation error is fixed, close.
+
+2005-01-04  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.25.4.cvs.1
+
+	* parameter.c (print_version): update copyright for 2005
+
+	* dsh.c: update copyright for 2005.
+
+2004-12-03  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.25.4
+
+	* dsh.c: include signal.h if it exists.
+
+	* configure.ac (localedir): add check for signal.h
+
+2004-11-13  Junichi Uekawa  <dancer@debian.org>
+
+	* TODO: Update todo file.
+
+2004-11-10  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/copyright (Copyright): update copyright year.
+
+	* parameter.c (print_version): update copyright info to say 2004.
+
+	* AUTHORS: remove dancer@mikilab.doshisha.ac.jp from mail address.
+	No longer valid.
+
+2004-06-06  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/control (Build-Depends): add versioned dependency on libdshconfig for versioned symbols.
+
+	* configure.ac: 0.25.3
+
+2004-05-30  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.25.2.1.cvs.2
+
+	* Makefile.am (EXTRA_DIST): add
+	(TESTS): add test.
+
+	* tests/machinelist-comment.txt: test data
+
+	* tests/machinelist-comment-test.sh: test
+
+	* NEWS: Add notes
+
+	* THANKS: update
+
+	* parameter.c (stripwhitespace): Add code contributed from Alexander
+	Zangerl <az@snafu.priv.at> bug: 249794
+
+	* dsh.1: update documentation.
+
+2004-05-27  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.25.2.1.cvs.1
+
+	* dsh.spec: Appended
+
+	* Makefile.am (EXTRA_DIST): add dsh spec file.
+
+2004-04-25  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: re-dist 0.25.2.1
+
+2004-04-20  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac (DSHVERSION): 0.25.2
+
+	* dsh.c (run_input_forking_child_processes_process): Add comment on the 
+	relevant part of code, that this routine has limitations.
+
+	* NEWS: add news item
+
+	* dsh.ja.1: update.
+
+	* dsh.1: Note the limitation in current implementation
+
+2004-04-16  Junichi Uekawa  <dancer@debian.org>
+
+	* TODO: Add note on the TODO item.
+
+2004-04-15  Junichi Uekawa  <dancer@debian.org>
+
+	* NEWS: update news
+
+	* configure.ac: 0.25.1.cvs.1
+
+	* dsh.c (run_input_forking_child_processes_process): add a comment
+	on what the problem area is.
+
+2004-01-21  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c (run_input_forking_child_processes_process): Add some kind of message.
+	"Process terminated (before write)." message should be eliminated somewhere in the
+	future.
+
+	* NEWS: update news.
+
+	* configure.ac: 0.25.0.cvs.2
+
+	* tests/segv-catcher.sh: passes now.
+	TODO: when in ssh, 'exit' does not immediately terminate the process,
+	the next input will. This is a bug.
+
+	* dsh.c (run_input_forking_child_processes_process): add error handling and signal handling in
+	write.
+
+	* Makefile.am (TESTS): add test segv-catcher.sh
+
+	* tests/segv-catcher.sh: add new to check the assertion failed message.
+	dsh: dsh.c:573: do_shell: Assertion `((((__extension__ ({ union { __typeof(childstatus) __in; int __i; } __u; __u.__in = (childstatus); __u.__i; }))) & 0x7f) == 0)' failed.
+
+	* dsh.c (do_shell): exit code 2 if signal received.
+	update copyright for 2004
+
+	* dsh.1: update doc.
+
+	* tests/param-i.sh (c): some output
+
+2003-09-18  Junichi Uekawa  <dancer@debian.org>
+
+	* drshd.c: create a file template for the program, not much content included yet.
+
+	* parameter.c (parse_options): sanity checking moved to its own function.
+	(sanity_checking): new function for sanity checking of options.
+
+	* configure.ac: 0.25.0.cvs.1
+
+	* parameter.c (parse_options): reword.
+
+2003-09-17  Junichi Uekawa  <dancer@debian.org>
+
+	* NEWS: update.
+
+	* configure.ac: 0.25.0
+
+	* debian/control (Description): update description to 
+	explain that this thing has window-limit.
+
+	* dsh.c (execute_rsh_single): check that this routine works;
+	waitpid with WAIT_ANY on forklimit.
+
+	* dsh.ja.1: update.
+
+	* dsh.1: reworded.
+
+	* TODO: udpate, connection limit is implemented. remove.
+
+2003-09-16  Junichi Uekawa  <dancer@debian.org>
+
+	* tests/param-F-forklimit.sh: show time.
+	modify the test to be apparent.
+
+	* tests/param-F-invalid.sh: fix bug.
+
+	* dsh.c (execute_rsh_single): wait for ANY when wait_shell is not.
+
+	* Makefile.am (TESTS): add the test here.
+
+	* dsh.c (execute_rsh_single): add debug verbose message.
+
+	* tests/param-F-forklimit.sh: new test for visually checking.
+
+	* tests/param-f-fail.sh: fixed a bug in script.
+
+	* Makefile.am (TESTS): add test.
+
+	* tests/param-F-invalid.sh: create check for param-F-invalid.sh
+
+	* configure.ac (DSHVERSION): 0.24.2.cvs.1
+
+	* dsh.c (execute_rsh_single): check forklimit.
+	Declare currentforkcount as "dsh.c" static variable.
+
+	* parameter.c (parse_options): --forklimit and -F
+	(print_help): -F
+	(parse_options): add sanity checking.
+
+	* dsh.ja.1: document -F
+
+	* dsh.1: document -F
+
+	* dsh.conf.ja.5: update.
+
+	* parameter.c (load_configfile): forklimit
+
+	* dsh.conf.5: document forklimit
+
+	* TODO: update Todo file adding my wishlists.
+
+2003-08-30  Junichi Uekawa  <dancer@debian.org>
+
+	* TODO: update TODO file.
+
+2003-08-26  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.24.2
+
+	* Makefile.am (TESTS): add test
+
+	* tests/test-bufferoverflow.sh (HOME): add check for buffer-overflow which does not exist.
+
+2003-08-05  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.24.0
+
+2003-07-30  Junichi Uekawa  <dancer@debian.org>
+
+	* NEWS: update
+
+	* configure.ac: 0.23.12.cvs.1
+
+	* parameter.c: include netgroup.h conditionally.
+
+	* configure.ac (localedir): check for netgroup.h, which netbsd seems to have, and conditionally include netgroup.h for checking setnetgrent.
+	
+
+2003-07-26  Junichi Uekawa  <dancer@debian.org>
+
+	* NEWS: 0.23.12
+
+	* configure.ac: Fix the checking message for libdshconfig.h
+
+2003-07-20  Junichi Uekawa  <dancer@debian.org>
+
+	* NEWS: Add notes that Tru64 UNIX and HP-UX are now supported
+
+	* configure.ac: Include unistd.h for netdb.h checking.
+	Tru64 Unix defines setnetgrent in netdb.h, and setnetgrent returns void.
+	0.23.11.cvs.2
+
+2003-07-19  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: cvs.1
+
+2003-06-12  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.11
+	Improve libdshconfig check. Use AC_COMPILE_IFELSE rather than 
+	AC_CHECK_HEDAERS (which only check for system headers)
+	
+	* Makefile.am (TESTS_ENVIRONMENT): add version to strings to pass to 
+	test scripts.
+
+	* tests/news-okay.sh: check for version mismatch
+
+	* NEWS: update the news file.
+
+2003-06-10  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: error out when dshconfig.h is not available.
+	Reported from Tomo Hiroyasu.
+	0.23.10.cvs.2
+
+2003-06-09  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.10.cvs.1
+
+	* Makefile.am (build-man/dsh.conf.5): reorder things so that 
+	it does not error-out on solaris.
+	It was verified that it builds on cygwin fine, by 
+	Tomo Hiroyasu.
+
+2003-06-08  Junichi Uekawa  <dancer@debian.org>
+
+	* THANKS: create file to list people who have reported bugs on 
+	dsh.
+
+	* configure.ac: 0.23.10
+	
+	* README: modify the contents so that it contains some information
+	rather than unhelpful pointer.
+
+	* parameter.c (read_machinenetgroup): check for setnetgrent 
+	and do dummy action when not available.
+
+	* TODO: update TODO file.
+
+	* configure.ac: 0.23.9.cvs.2
+	check for funcs setnetgrent getnetgrent endnetngrent which seem not 
+	to be available on cygwin. 
+	reported by Tomo Hiroyasu <tomo@is.doshisha.ac.jp>
+
+2003-06-07  Junichi Uekawa  <dancer@debian.org>
+
+	* Makefile.am (build-man/dsh.conf.5): 
+	(build-man/dsh.1): do not use $<, which is not supported on AIX
+	and SunOS make.
+	Tomo Hiroyasu <tomo@is.doshisha.ac.jp>
+
+	* configure.ac: add libdshconfig.h check, reported from 
+	Tomo Hiroyasu <tomo@is.doshisha.ac.jp>
+
+	* dsh.c (dsh_update_exit_code): use EXIT_SUCCESS instead of 0.
+
+	* configure.ac: 0.23.9.cvs.1
+	
+	* dsh.c (run_input_forking_child_processes_process): add error message for forking
+
+	* tests/param-i.sh: change to support getopt which does not support -rhoge 
+	style command-line specification.
+	added extra test, to see what is giving warnings.
+
+	* parameter.c: update docs.
+	(print_version): update copyright statement.
+	(read_machinenetgroup): update doc; duplicates are removed.
+
+	* linkedlist.c: update docs.
+
+	* parameter.h: fix doc strings.
+
+	* configure.ac: 0.23.9
+
+	* NEWS: update
+
+	* dsh.c (fork_and_pipe_echoing_routine): and re-revert to use it as the 
+	parent process; and return the child exit-code to the parent.
+
+	* dsh.conf (verbose): change default to not show machinenames.
+
+	* tests/param-r-invalid.sh: add more checks
+
+	* dsh.c (fork_and_pipe_echoing_routine): child process
+	is the one who does echoing back process, not the parent process.
+	Changing the way around.
+	I don't know if it will cause problems, but return-code handling is much better now.
+	
+
+2003-06-06  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.8.cvs.1
+
+	* NEWS: mark so that 0.23.8 had broken tests, skip that version.
+
+2003-06-05  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c (execute_rsh_single): assert that thing is child is exited.
+
+	* configure.ac: 0.23.8
+
+	* NEWS: update news.
+
+	* Makefile.am (viper): remove rules for mikilab
+
+	* configure.ac: 0.23.7.cvs.5
+
+	* dsh.ja.1: update
+
+	* dsh.1: update docs on exit code.
+
+	* dsh.c (dsh_update_exit_code): use the first non-zero exit 
+	  code as return code.
+
+	* Makefile.am (TESTS): add param-r-invalid
+
+	* tests/param-r-invalid.sh: create new test for -rinvalid-exec-file
+
+	* dsh.c (do_echoing_back_process): more translation
+
+	* parameter.c (parse_options): update doc.
+
+	* tests/param-f-fail.sh: explicitly check for return code value.
+
+	* configure.ac: 0.23.7.cvs.4
+	
+	* dsh.c: define dsh_exit_code, default to 0.
+	(do_shell): return dsh_exit_code instead of '0'.
+	update file copyright.
+	(dsh_update_exit_code): create a template for adding full features.
+	I'd add things later.
+
+2003-06-04  Junichi Uekawa  <dancer@debian.org>
+
+	* Makefile.am (install-data-local): typo in install location of 
+	dsh.conf.5
+
+	* debian/compat: define compat version of 3.
+
+	* configure.ac: 0.23.7.cvs.3 -- passes make distcheck
+
+	* Makefile.am (install-data-local): add missing ${srcdir}
+	(uninstall-local): add uninstall target.
+
+	* configure.ac: 0.23.7.cvs.2
+
+	* NEWS: update.
+
+	* dsh.ja.1: fix wording.
+
+	* Makefile.am (install-data-local): support @sysconfdir@
+	manual pages are installed properly, including localized ones.
+
+	* dsh.conf.ja.5: use @sysconfdir@
+
+	* dsh.conf.5: ditto
+
+	* Makefile.am (install-data-local): try and make a i18n build script.
+
+	* dsh.ja.1: use @sysconfdir@ instead of hard-coding.
+
+	* dsh.1: use @sysconfdir@ instead of hard-coding.
+
+2003-05-29  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.7.cvs.1
+	* ja pages were not included in the distribution, include as
+	  EXTRA_DIST
+	
+	* configure.ac: 0.23.7
+
+	* NEWS: created file, added info on this release of dsh.
+
+	* Makefile.am (noinst_dist_man_MANS): Japanese translation are 
+	noinst targets for now, since automake doesn't install them to 
+	proper places.
+
+	* dsh.conf.ja.5: created new file.
+
+	* Makefile.am (dist_man_MANS): add files.
+
+	* dsh.conf.5: created new file.
+
+	* dsh.ja.1: create japanese translation.
+
+	* dsh.1: update docs, mention remsh.
+
+2003-01-24  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.6
+
+	* Makefile.am (TESTS): add the test
+
+	* tests/param-b-0.sh: new test to check buffer size param functionality
+
+	* parameter.c (parse_options): check that buffersize is not 0 or 
+	any silly value.
+
+2002-11-27  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.5
+
+2002-11-12  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.4.cvs.3
+
+	* dsh.1: update documentation to include -i.
+
+2002-10-22  Junichi Uekawa  <dancer@debian.org>
+
+	* TODO: update TODO file with beautification.
+
+	* configure.ac: 0.23.4.cvs.2
+
+	* dsh.1: update manual page
+
+	* configure.ac: 0.23.4.cvs.1
+
+	* Makefile.am (TESTS): update
+	(EXTRA_DIST): add test.space.file
+
+	* tests/param-f-with-space.sh: test with reading file with space
+	to make sure that:
+	#165746: dsh.updatelist generates invalid /etc/dsh/machines.list
+	is not happening.
+
+	* tests/list.space.file: file with space.
+
+2002-10-21  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.4
+
+	* debian/rules (binary-arch): add upstream changelog.
+
+2002-10-19  Junichi Uekawa  <dancer@debian.org>
+
+	* parameter.c (parse_options): fail on error.
+
+	* dsh.c (execute_rsh_multiple): add some error checking.
+
+	* configure.ac: 0.23.3
+
+	* linkedlist.c (lladd): fix typo.
+
+	* configure.ac: 0.23.2.cvs.2
+
+	* autogen.sh: remove ./configure from autogen script.
+
+	* linkedlist.c (lladd): add error checking in lladd routine.
+	add gettext related includes.
+
+2002-10-09  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.2.cvs.1
+	change version so that we know.
+
+2002-10-07  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/rules (DSH): remove unneeded definitions
+
+	* debian/control (Standards-Version): update standards-version to 3.5.7
+
+2002-10-02  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: spelling mistake in configure script. fix.
+
+2002-10-01  Junichi Uekawa  <dancer@debian.org>
+
+	* dcp.sh: trying to create an implementation of dcp.
+
+2002-09-30  Junichi Uekawa  <dancer@debian.org>
+
+	* parameter.c (parse_options): move index_point to inside the 
+	HAVE_GETOPT_LONG, because index_point is used with getopt_long only.
+
+	* configure.ac: 0.23.2
+	Compiles and works on AIX.
+
+	* tests/param-unknown.sh: add -u to check.
+	along with --unknown-parameter.
+
+	* dsh.c (do_echoing_back_process): use size_t for getline argument.
+
+	* configure.ac: 0.23.1.aix.2
+
+	* parameter.c (read_machinenetgroup): 
+	work around AIX and work around void function.
+
+	* configure.ac: check for setnetgrent
+	(SETNETGRENT_RETURNS_VOID): check for setnetgrent which
+	returns void (AIX is possibly broken in this respect, so
+	work around it).
+
+	* parameter.c (read_machinelist): use size_t instead of int, 
+	because getline parameter is in size_t, and AIX likes 
+	size_t to be a long.
+	(parse_options): change ifdef statement because AIX 
+	cpp barfs on #ifdef outside of function.
+	move config.h inclusion to start.
+
+	* configure.ac: change gettext check to be warning.
+	version 0.23.1.aix.1
+
+	* configure.ac: version 0.23.1, translation is updated,
+	and more checks are in place.
+
+	* configure.ac: add checks that are recommended by 
+	autoconf. They aren't really handled right now, but you know
+	configure is barfing, at least.
+
+2002-09-29  Junichi Uekawa  <dancer@debian.org>
+
+	* add doc++ rule.
+
+2002-09-28  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: remove changequote.
+	remove AH_TEMPLATE and use AC_DEFINE third param
+
+2002-09-25  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.23.0, introducing new code to make dsh perform with POSIXly correct getopt behavior.
+
+	* Makefile.am (TESTS): added the new test.
+
+	* tests/param-gnu-getopt.sh: check for the GNU getopt hackery.
+
+	* parameter.c (parse_options): add GNU getopt hackery to make it work with POSIX manner.
+
+	* configure.ac: use @<:@@:>@ autoconf quadrigraph
+	Check that getopt is a GNU getopt, and allow for escapes.
+
+	* Makefile.am (TESTS_ENVIRONMENT): add environment for LC_ALL and LANG
+
+2002-09-24  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: add AC_PROG_MAKE_SET as advised by info page for using SUBDIR
+
+2002-09-23  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/dsh.updatelist: update the machines list to use ${CLUSTERXML} format
+	instead of using hard-coded cluster.xml location.
+
+	* Makefile.am (TESTS): add it to the tests list.
+
+	* tests/param-i.sh: new test to check whether the -i option works.
+
+	* tests/param-cn4.sh: use ${bindir} variable, because full path of dsh changes
+
+	* Makefile.am (TESTS_ENVIRONMENT): specify bindir=$(bindir) for use.
+
+	* Makefile.am (SUBDIRS): remove tests from SUBDIRS
+	(EXTRA_DIST): extra dist for tests is done with the main Makefile.am
+
+	* configure.ac: remove tests/Makefile.
+
+	* tests/param-cn4.sh: check the -cn4 option is working.
+	* tests/Makefile.am (EXTRA_DIST): add 
+	* Makefile.am (TESTS): add
+
+	* tests/param-unknown.sh: add test for unknown param
+	* Makefile.am (TESTS): add
+	* tests/Makefile.am (EXTRA_DIST): add.
+
+	* parameter.c (parse_options): handle unknown option parameter properly.
+	(parse_options): abort on wrong option.
+
+2002-09-22  Junichi Uekawa  <dancer@debian.org>
+
+	* tests/Makefile.am (EXTRA_DIST): dist target
+	* Makefile.am (TESTS): add to test target
+	* tests/param-f-fail.sh: add new test to check failure to -f.
+
+	* parameter.c (read_machinelist): fail on error to 
+	open the file.
+	(read_machinenetgroup): fail on error.
+	exit(1) on failure.
+
+	* Makefile.am (SUBDIRS): add support for tests.
+	(check_PROGRAMS): add dsh to check_PROGRAMS as well
+
+	* tests/list.file: file list to use with -f option.
+
+	* tests/param-m.sh: test -m option.
+
+	* tests/param-f.sh: test -f option.
+
+	* configure.ac: add tests/Makefile
+
+	* tests/Makefile.am (EXTRA_DIST): create testsuite.
+
+	* configure.ac: 0.22.0
+	some new features are being added. Bump up the version.
+	start debugging those features :)
+
+	* dsh.1: document that multiple specification of 
+	same machine will not be valued, and be merged into one.
+
+	* parameter.c (machinelist_lladd): implement using llmatch.
+	This fixes Debian BUG
+	Bug#161845: dsh: Weak parsing of /etc/dsh/dsh.conf, and of options 
+	Philippe Troin <phil@fifi.org>
+	Duplicate machine entries are ignored.
+	
+	* linkedlist.h: add definition of llmatch
+
+	* linkedlist.c (llmatch): string-matching routine.
+
+	* parameter.c 
+	(split_machines_list_and_add_machines, read_machinenetgroup) 
+	(read_machinelist): use machinelist_lladd instead of lladd
+	(machinelist_lladd): new function.
+
+2002-09-21  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c (execute_rsh_single): add notes on when NOT to fork.
+
+2002-09-20  Junichi Uekawa  <dancer@debian.org>
+
+	* parameter.h (do_shell): move over a function declaration to 
+	parameter.h so that checks will exist, from parameter.c
+
+	* dsh.1: document the new feature, the "," delimiter for -m
+	option.
+
+	* parameter.c (split_machines_list_and_add_machines): new function,
+	allow specifying of -m host1,host2 kind of parameter.
+	(parse_options): use the split_machines_list_and_add_machines
+
+2002-09-19  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.21.3
+	The main problem seems to have been addressed. Yay!
+
+	* parameter.c (stripwhitespace): change stripn to stripwhitespace
+	and strip whitespace while we are at it.
+	(read_machinelist): strip whitespace when reading config file.
+	(read_machinelist): properly ignore blank lines.
+	(stripwhitespace): fix typo.
+	(stripwhitespace): fix reverse-logic.
+	(stripwhitespace): fix typo.
+
+	* dsh.c (run_input_forking_child_processes_process): trying to debug the thing now.
+	(run_input_forking_child_processes_process): I made a mistake.
+	0 is a end-of-file for read(). Treat it like that, and it should be all happy now.
+	(run_input_forking_child_processes_process): close the output fd in the parent process.
+
+2002-09-18  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c (main): add error checking for bindtextdomain, and textdomain calls.
+	(main): some proper handling.
+
+	* configure.ac: 0.21.2 
+	with even more minor cosmetic bugfixes, which does not address the main problem.
+
+	* dsh.c (run_input_forking_child_processes_process): call open_devnull for default case.
+
+	* parameter.h (open_devnull): define
+
+	* parameter.c (open_devnull): make this symbol public
+
+	* configure.ac: 0.21.1
+
+	* dsh.c (run_input_forking_child_processes_process): exit from process, not just break from the case 
+	statement!
+	Make distributed copy work.
+
+2002-09-16  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.21.0
+
+	* dsh.c (run_input_forking_child_processes_process): properly close fd when process terminates.
+
+	* linkedlist.c: add include for parameter.h
+
+	* dsh.1: document -b.
+
+	* parameter.c (print_help): document -i and -b
+	(parse_options): add -b handling.
+
+	* parameter.h: add declaration for malloc_with_error
+
+	* parameter.c (malloc_with_error): make the static function public.
+	Remove the same function from linkedlist.c
+
+	* dsh.1: document --duplicate-input
+
+	* parameter.c (parse_options): add -i --duplicate-input option.
+
+	* dsh.c: define buffer_size; default is 1024.
+
+	* parameter.h: define buffer_size;
+
+	* dsh.c (run_input_forking_child_processes_process): implement the writing out.
+	(do_shell): call the run_input_forking_child_processes_process.
+
+	* parameter.c (parse_options), and other places: change var name to pipe_option.
+
+	* parameter.h: change show_machine_names to pipe_option
+
+	* dsh.c (main): remove call to open_devnull
+	change name of show_machine_names to pipe_option.
+
+	* parameter.c (open_devnull): move from dsh.c to parameter.c
+	(parse_options): sanity check.
+	(parse_options): call open_devnull.
+
+	* dsh.c (do_execute_with_optional_pipe): use PIPE_OPTION_OUTPUT instead of hardcoding
+	(execute_rsh_single): add partial PIPE_OPTION_INPUT handling routine.
+
+	* parameter.c (parse_options): use PIPE_OPTION_OUTPUT instead of hardcoding 1.
+
+	* dsh.h (PIPE_OPTION_INPUT): add constant for options..
+
+	* debian/control (Description): add upstream URL in description line.
+
+2002-09-14  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c (do_echoing_back_process): change the function name, to clarify that this is a process..
+	(do_shell): add error message
+	(do_shell): return value
+	(execute_rsh): return value
+	(execute_rsh_multiple): return value
+	(execute_rsh_single): return value
+
+	* configure.ac: 0.20.4
+
+	* parameter.c (parse_options): add notes on what is problematic about it.
+
+	* dsh.c (main): note the plan; when show_machine_names &2 == 1,
+	it should read input and duplicate the value to all other 
+	processes.
+	(execute_rsh_multiple): simplify code with "-n 4" to "-n4" kind of
+	parameter passing.
+	(do_execute_with_optional_pipe): add the hook to do things properly
+	later.
+	(fork_and_pipe_echoing_routine): return -1 instead of exit(EXIT_FAILURE)
+	(do_execute_with_optional_pipe): changed implementation to use
+	fork_and_pipe_echoing_routine.
+	(do_execute_with_optional_pipe): fix typo
+	(execute_rsh_multiple): pass -r option to other end when doing -nX. !!!
+	It was missing from previous releases.
+
+	* parameter.c (parse_options): change show_machine_names = 1 to
+	|= 1.
+	(load_configfile): change logic to do |= 1
+
+	* dsh.c (do_execute_with_optional_pipe): unify the code path
+	for pipe option, and other.
+
+	* linkedlist.c (llexec): document functions.
+
+	* dsh.c: some updates  to documentation
+
+2002-09-11  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c: include locale.h
+
+	* autogen.sh: call aclocal -I m4
+
+	* configure.ac: 0.20.3
+
+	* parameter.c (parse_options): update and mark for translation
+
+	* Makefile.am (dsh_CFLAGS): add localedir to defines.
+	(SUBDIRS): add po
+
+	* dsh.c: include gettext.h
+	(do_execute_with_optional_pipe): gettextize string.
+	(main): add setlocale, bindtextdomain, textdomain.
+
+	* Makefile.am (dsh_SOURCES): add gettext.h
+
+	* gettext.h: add from gettext.
+
+	* configure.ac: AM_GNU_GETTEXT([external]);
+	(localedir): add localedir definition, ALL_LINGUAS definition, and 
+	gettext function checking.
+
+2002-09-11  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.am (SUBDIRS): New variable.
+	(ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add config.rpath.
+	* configure.ac (AC_OUTPUT): Add po/Makefile.in,
+
+2002-09-06  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.20.2
+
+2002-08-14  Junichi Uekawa  <dancer@debian.org>
+
+	* Makefile.am: define DSH_COMMANDLINE to be bindir/PACKAGE
+
+	* dsh.c (execute_rsh_multiple): use DSH_COMMANDLINE instead of PACKAGE.
+
+2002-07-24  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: 0.20.1
+
+	* Makefile.am: modify dist targets updated from dmachinemon sources.
+
+2002-06-25  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.ac: update for autoconf1.5, change to ac. 
+	probably requires automake 1.6
+	version 0.0.19.8
+	change to version 0.20.0
+
+2002-06-23  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.h: fix typo.
+	* configure.in: look for asprintf
+	version 0.0.19.7
+	
+2002-06-19  Junichi Uekawa  <dancer@debian.org>
+
+	* Makefile.am (man_MANS): remove dsh_LDFLAGS, it's set in configure.
+
+2002-06-15  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.in: emit error if dshconfig is not found.
+	version 0.0.19.6
+
+2002-06-14  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.in: 0.0.19.5
+
+	* parameter.c (print_version): update copyright information.
+
+	* dsh.h: add prototype for asprintf.
+
+	* configure.in: 0.0.19.4
+
+	* debian/rules (configure-stamp): fix up configure script to 
+	put files in /etc/dsh, and mandir in /usr/share/man
+
+	* Makefile.am (EXTRA_DIST): add autogen.sh to dist target
+	(EXTRA_DIST): add sysconf_DATA
+
+	* parameter.c (parse_options): use DSHCONFDIR instead of hardcoding /etc/dsh
+
+	* Makefile.am (dsh_CFLAGS): add -DDSHCONFDIR to dsh_CFLAGS
+
+	* AUTHORS: updated authors list to add notes on solaris port 
+
+	* Makefile.am (EXTRA_DIST): add dsh.conf to EXTRA_DIST target.
+
+	* dsh.c: 
+	* linkedlist.c: 
+	* parameter.c: reorder includes to get dsh.h earlier, and remove reference to config.h
+
+	* dsh.h (getline): add declaration for getline function, if it doesn't exist.
+	include config.h here.
+
+	* dsh.c: remove unnecessary getopt.
+	(getline): remove the static declaration.
+
+	* configure.in: 0.0.19.3
+
+	* parameter.c, dsh.c, linkedlist.c: revert use of <config.h> to use "config.h".
+	someone else is providing config.h somewhere, breaking my build.
+
+	* parameter.c: add ifdef for HAVE_GETOPT_H, and getopt_long
+	Thanks to Petter Reinholdtsen <pere@hungry.com>
+
+	* dsh.c (asprintf): add asprintf definition.
+	Thanks to Petter Reinholdtsen <pere@hungry.com>
+	(getline): copy getline definition from libdshconfig.
+
+	* configure.in: add AC_CHECK_HEDAERS/FUNCS for getopt
+	Thanks to Petter Reinholdtsen <pere@hungry.com>
+
+2002-06-13  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.in: 0.0.19.2
+
+	* debian/rules (binary-arch): removed the installman specifics, because 
+	the upstream makefile will handle it.
+
+	* Makefile.am (man_MANS): add dsh.1 to man_MANS, and EXTRA_DIST
+	Thanks to Petter Reinholdtsen <pere@hungry.com>
+
+	* configure.in: check libdshconfig for open_dshconfig
+
+	* linkedlist.c, parameter.c, dsh.c: #include <config.h> instead of "config.h"
+
+2002-06-12  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.in: version 0.0.19.1
+
+	* autogen.sh: add --force
+
+	* dsh.c (do_echoing_back): add a missing free for buf,
+	Thanks to Petter Reinholdtsen <pere@hungry.com>
+
+	* configure.in: version 0.0.19.0
+
+	* Makefile.am: update prinstine-source generator/Debian 
+
+2002-06-01  Junichi Uekawa  <dancer@debian.org>
+
+
+	* dsh.c (do_execute_with_optional_pipe): use PACKAGE instead of PROGRAM_NAME
+	(do_execute_with_optional_pipe): 
+
+	* parameter.c (read_machinelist): 
+	* parameter.c (load_configfile): ditto
+
+	* configure.in: add AM_MAINTAINER_MODE
+
+	* dsh.h (DSH_CONF): remove PROGRAM_NAME
+
+2002-05-31  Junichi Uekawa  <dancer@debian.org>
+
+	* configure.in: change version number to 0.0.19pre
+
+	* Makefile.am (../@PACKAGE@_@VERSION@.orig.tar.gz): fix the target not to overwrite pristine upstream tarball.
+
+	* configure.in: fix typo in package name.
+
+	* Makefile.am (dsh_SOURCES): fix Make rule to allow distcheck to succeed.
+
+	* debian/changelog: make it a non-native package.
+
+	* Makefile.am, configure.in, autogen.sh: added
+
+	* debian/rules (configure-stamp): remove reference to dshversion.h
+
+	* parameter.c: use VERSION instead of DSH_VERSION
+
+2002-05-26  Junichi Uekawa  <dancer@debian.org>
+
+	* TODO: update TODO, with notes on bug.
+
+2002-05-16  Junichi Uekawa  <dancer@debian.org>
+
+	* parameter.c (read_machinelist): minor cosmetic fix.
+	if alternatelistfile is NULL, do not try to display it in error 
+	message.
+
+2002-04-20  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/control (Build-Depends): remove libtool dependency.
+
+	* Makefile (install): updated to remove libtool reference.
+
+	* debian/control (Build-Depends): add build-depends on libtool.
+
+	* Makefile: removed libdshconfig trace
+
+	* debian/rules (clean): remove libdshconfig trace.
+
+	* move libdshconfig from dsh source to separate package
+
+2002-03-31  Junichi Uekawa  <dancer@debian.org>
+
+	* libdshconfig.c (free_dshconfig): free the title and data for each item, fix memleak.
+
+2002-03-30  Junichi Uekawa  <dancer@debian.org>
+
+	* libdshconfig.h: added dshconfig_searchdata
+
+	* libdshconfig.c (dshconfig_searchdata): added
+
+2002-03-28  Junichi Uekawa  <dancer@debian.org>
+
+	* libdshconfig.h: added declaration for dshconfig_splitline.
+
+	* libdshconfig.c (dshconfig_splitline): created a new function, so that this piece of code can be re-used.
+	(read_oneline): changed to use dshconfig_splitline instead
+	(read_oneline): fixing things, so that dancer acpi can use this 
+	parser routine instead.
+
+2002-03-18  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/rules: install the libs and other things in the right package
+
+	* libdshconfig.h: added some ifndefs.
+
+	* Makefile (install): added include
+
+	* debian/rules (binary-arch): added dh_makeshlibs
+
+	* Makefile (install): make install target to use libtool
+	(install): fix minor detail in install target.
+
+	* libdshconfig.c (read_oneline): fix it so that # at the start of line won't cause segv.
+
+	* dsh.conf: modified to make it look different and for debugging dsh.
+
+	* parameter.c (load_configfile): rewrite the config reader using libdshconfig.
+
+	* test-dshconfig.c (main): comment.
+
+	* libdshconfig.c (free_dshconfig): add error check.
+
+	* libdshconfig.h: declare free_dshconfig
+
+	* libdshconfig.c (free_dshconfig): add new function. Probably required.
+
+	* Makefile (install): fixed makefile
+	(libdshconfig.la): making a shared lib.
+
+	* libdshconfig.c (read_oneline): fixing many bugs, to make it work. Yeah, it never compiled.
+	(read_oneline): fix end bug.
+
+	* libdshconfig.h: add declaration for open_dshconfig
+
+	* test-dshconfig.c (main): create a new program to test the function
+
+2002-02-27  Junichi Uekawa  <dancer@debian.org>
+
+	* debian/changelog: Mark for release
+
+2002-02-05  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c: some beautification
+	added header files "sys/stat.h" "fnctl.h" declaration
+	to get open() to work.
+
+	* libdshconfig.c (open_dshconfig): making a function implementation to hopefully work.
+
+	* debian/changelog: updated the changelog with the bugfixer.
+
+	* dsh.c (open_devnull): created a new function.
+	(main): uses /dev/null for input as default.
+
+2002-02-03  Junichi Uekawa  <dancer@debian.org>
+
+	* libdshconfig.c (read_oneline): some minor playing around.
+	Aiming to make a basis for config reader usable in dsh, and 
+	also another project I am planning to work on.
+	
+	* libdshconfig.h: created
+	(dshconfig): created
+	(dshconfig_internal): created
+
+	* libdshconfig.c: creating a new file.
+
+2002-01-26  Junichi Uekawa  <dancer@debian.org>
+
+	* dsh.c (main): error check asprintf.
+
+2002-01-25  Junichi Uekawa  <dancer@debian.org>
+
+	* ChangeLog: resume using the ChangeLog file.
+
+	* TODO: created as a memo to document some wishlist.
+
+2001-05-14  Junichi Uekawa  <dancer@netfort.gr.jp>
+
+	* dsh.1: added documentation for homedir configs.
+
+	* dsh.c (parse_options): added support for machines config.
+	(read_machinelist): The machines list support.
+	(parse_options): Configs in homedir too.
+
+2001-05-13  Junichi Uekawa  <dancer@netfort.gr.jp>
+
+	* dsh.1: Created a manpage
+
+	* Makefile: Copied from other project. 
+
+	* dsh.c: Created / started, by
+	dancer@{debian.org,netfort.gr.jp,mikilab.doshisha.ac.jp} 
+

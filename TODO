@@ -1,0 +1,19 @@
+Known bugs:
+
+* dsh -ic does not terminate when remote program terminates, it only 
+  really terminates when local connection is terminated.
+
+Some wishlist:
+
+* fanout with dshd opening connections, through ssh.
+* Some kind of FIFO set up, with something listening onto it.
+* Bug with fanout option, rsh requires some quoting. Dsh does not preserve the quotings.
+* rsh with timeout : rsh does not time out and fail... bug in rsh ?
+* implement dcp
+* in.drshd for dummy connection.
+* ssh timeout configuration, can you change the time it takes to
+   timeout?
+* ldap option, fork option for machine list
+* per-machine ssh/rsh specification.
+
+$Id: TODO,v 1.11 2005/03/16 00:14:55 dancer Exp $
