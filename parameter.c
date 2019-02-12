@@ -46,6 +46,14 @@
 #include "gettext.h"
 #define _(A) gettext(A)
 
+#define HTTP_IMPLEMENTATION
+#include "http.h"
+#include "json.h"
+
+#ifdef HAVE_SIGNAL_H
+#include <signal.h>
+#endif
+
 /**
  * allocate memory, and abort with error
  *
@@ -152,6 +160,70 @@ read_machinenetgroup(linkedlist * machinelist,
 #endif
   return machinelist;
 
+}
+
+linkedlist*
+read_machineconsul(linkedlist * machinelist, const char *servicename)
+{
+  char url[256];
+  snprintf(url, sizeof(url), "http://127.0.0.1:8500/v1/catalog/service/%s", servicename);
+
+  http_t *req = http_get(url, NULL);
+  if (!req)
+    {
+      fprintf(stderr, "%s: invalid http request (pre-execution). This shouldn't happen.\n", PACKAGE);
+      exit (1);
+    }
+
+  /* utter bullshit, but we don't want to crash if we can't connect */
+  signal(SIGPIPE, SIG_IGN);
+
+  http_status_t status = HTTP_STATUS_PENDING;
+  while (status == HTTP_STATUS_PENDING)
+    {
+      status = http_process(req);
+    }
+
+  if (status == HTTP_STATUS_FAILED)
+    {
+      int code; const char *msg;
+      if (req->status_code == 0)
+	{
+	  code = errno;
+	  msg = strerror(code);
+	}
+      else
+	{
+	  code = req->status_code;
+	  msg = req->reason_phrase;
+	}
+
+      fprintf(stderr, "%s: http request to consul failed: %d %s\n", PACKAGE, code, msg);
+      http_release(req);
+      exit (1);
+    }
+
+  struct json_value_s *root = json_parse(req->response_data, req->response_size);
+  struct json_array_s *list = root->payload;
+
+  struct json_array_element_s *elem;
+  for (elem = list->start; elem; elem = elem->next)
+    {
+      struct json_object_s *instance = elem->value->payload;
+      struct json_object_element_s *pair;
+      for (pair = instance->start; pair; pair = pair->next)
+	{
+	  if (strcmp(pair->name->string, "Node") != 0)
+	    continue;
+	  const char *node = ((struct json_string_s *) pair->value->payload)->string;
+	  machinelist = machinelist_lladd(machinelist, node);
+	}
+    }
+
+  free(root);
+  http_release(req);
+
+  return machinelist;
 }
 
 /**
@@ -456,6 +528,11 @@ parse_options ( int ac, char ** av)
 		if (verbose_flag) printf (_("Adding netgroup %s to the list\n"), optarg + 1);
                 machinelist = read_machinenetgroup(machinelist, optarg+1);
               }
+	    else if ('%' == *optarg)
+	      {
+		if (verbose_flag) printf(_("Adding consul nodes running service %s to the list\n"), optarg + 1);
+		machinelist = read_machineconsul(machinelist, optarg+1);
+	      }
             else
               {			/* using dsh's own method. */
 		char * buf1, *buf2;
