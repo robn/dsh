@@ -31,6 +31,9 @@ AC_COMPILE_IFELSE([
 ],AC_MSG_RESULT([yes]),AC_MSG_ERROR([needs libdshconfig.h to compile]))
 AC_CHECK_FUNCS([asprintf strdup getopt_long getline dup2 setlocale strcasecmp strchr setnetgrent getnetgrent endnetgrent])
 
+CF_LIB_SOCKET
+CF_LIB_NSL
+
 dnl check for libs
 AC_CHECK_LIB([dshconfig], [open_dshconfig],[],[AC_MSG_ERROR([dshconfig not found!!])])
 
