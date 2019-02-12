@@ -3,3 +3,9 @@ This is Dancer's shell, a Distributed Shell implementation.
 Please read dsh.1 manpage for details on how to use the program,
 and dsh.conf.5 manpage for how to configure.
 
+----------
+
+On a request from a colleague, I added support for Consul service lookup. Use
+-g %servicename for that.
+
+-- Rob N ★, Feb 2019
