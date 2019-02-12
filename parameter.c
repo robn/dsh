@@ -162,21 +162,13 @@ read_machinenetgroup(linkedlist * machinelist,
 
 }
 
-linkedlist*
-read_machineconsul(linkedlist * machinelist, const char *servicename)
-{
-  char url[256];
-  snprintf(url, sizeof(url), "http://127.0.0.1:8500/v1/catalog/service/%s", servicename);
-
+static http_t *_do_http_get(const char *url) {
   http_t *req = http_get(url, NULL);
   if (!req)
     {
       fprintf(stderr, "%s: invalid http request (pre-execution). This shouldn't happen.\n", PACKAGE);
       exit (1);
     }
-
-  /* utter bullshit, but we don't want to crash if we can't connect */
-  signal(SIGPIPE, SIG_IGN);
 
   http_status_t status = HTTP_STATUS_PENDING;
   while (status == HTTP_STATUS_PENDING)
@@ -198,30 +190,57 @@ read_machineconsul(linkedlist * machinelist, const char *servicename)
 	  msg = req->reason_phrase;
 	}
 
-      fprintf(stderr, "%s: http request to consul failed: %d %s\n", PACKAGE, code, msg);
+      fprintf(stderr, "%s: http request failed: %d %s\n", PACKAGE, code, msg);
       http_release(req);
       exit (1);
     }
 
-  struct json_value_s *root = json_parse(req->response_data, req->response_size);
-  struct json_array_s *list = root->payload;
+  return req;
+}
 
-  struct json_array_element_s *elem;
-  for (elem = list->start; elem; elem = elem->next)
+linkedlist*
+read_machineconsul(linkedlist * machinelist, const char *servicename)
+{
+  /* utter bullshit, but we don't want to crash if we can't connect */
+  signal(SIGPIPE, SIG_IGN);
+
+  http_t *dcreq = _do_http_get("http://127.0.0.1:8500/v1/catalog/datacenters");
+  struct json_value_s *dcroot = json_parse(dcreq->response_data, dcreq->response_size);
+  struct json_array_s *dclist = dcroot->payload;
+
+  struct json_array_element_s *dcelem;
+  for (dcelem = dclist->start; dcelem; dcelem = dcelem->next)
     {
-      struct json_object_s *instance = elem->value->payload;
-      struct json_object_element_s *pair;
-      for (pair = instance->start; pair; pair = pair->next)
-	{
-	  if (strcmp(pair->name->string, "Node") != 0)
-	    continue;
-	  const char *node = ((struct json_string_s *) pair->value->payload)->string;
-	  machinelist = machinelist_lladd(machinelist, node);
-	}
+      const char *dc = ((struct json_string_s *) dcelem->value->payload)->string;
+
+      char url[256];
+      snprintf(url, sizeof(url), "http://127.0.0.1:8500/v1/catalog/service/%s?dc=%s", servicename, dc);
+
+      http_t *req = _do_http_get(url);
+
+      struct json_value_s *root = json_parse(req->response_data, req->response_size);
+      struct json_array_s *list = root->payload;
+
+      struct json_array_element_s *elem;
+      for (elem = list->start; elem; elem = elem->next)
+        {
+          struct json_object_s *instance = elem->value->payload;
+          struct json_object_element_s *pair;
+          for (pair = instance->start; pair; pair = pair->next)
+            {
+              if (strcmp(pair->name->string, "Node") != 0)
+                continue;
+              const char *node = ((struct json_string_s *) pair->value->payload)->string;
+              machinelist = machinelist_lladd(machinelist, node);
+            }
+        }
+
+      free(root);
+      http_release(req);
     }
 
-  free(root);
-  http_release(req);
+  free(dcroot);
+  http_release(dcreq);
 
   return machinelist;
 }
