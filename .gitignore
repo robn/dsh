@@ -1,0 +1,12 @@
+.deps/
+Makefile
+autom4te.cache/
+build-man/
+config.h
+config.h.in~
+config.log
+config.status
+*.o
+dsh
+stamp-h1
+test-driver
