@@ -114,7 +114,7 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(man1dir)" \
 	"$(DESTDIR)$(man5dir)" "$(DESTDIR)$(sysconfdir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_dsh_OBJECTS = dsh-dsh.$(OBJEXT) dsh-linkedlist.$(OBJEXT) \
-	dsh-parameter.$(OBJEXT)
+	dsh-parameter.$(OBJEXT) dsh-json.$(OBJEXT)
 dsh_OBJECTS = $(am_dsh_OBJECTS)
 dsh_LDADD = $(LDADD)
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -139,7 +139,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/dsh-dsh.Po \
+am__depfiles_remade = ./$(DEPDIR)/dsh-dsh.Po ./$(DEPDIR)/dsh-json.Po \
 	./$(DEPDIR)/dsh-linkedlist.Po ./$(DEPDIR)/dsh-parameter.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
@@ -588,7 +588,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-dsh_SOURCES = dsh.c linkedlist.c parameter.c dsh.h linkedlist.h parameter.h gettext.h
+dsh_SOURCES = dsh.c linkedlist.c parameter.c dsh.h linkedlist.h parameter.h gettext.h json.c json.h http.h
 original_man = dsh.1 dsh.conf.5 
 man_MANS = build-man/dsh.1 build-man/dsh.conf.5
 translated_man = dsh.conf.ja.5 dsh.ja.1
@@ -752,6 +752,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dsh-dsh.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dsh-json.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dsh-linkedlist.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/dsh-parameter.Po@am__quote@ # am--include-marker
 
@@ -823,6 +824,20 @@ dsh-parameter.obj: parameter.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='parameter.c' object='dsh-parameter.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dsh_CFLAGS) $(CFLAGS) -c -o dsh-parameter.obj `if test -f 'parameter.c'; then $(CYGPATH_W) 'parameter.c'; else $(CYGPATH_W) '$(srcdir)/parameter.c'; fi`
+
+dsh-json.o: json.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dsh_CFLAGS) $(CFLAGS) -MT dsh-json.o -MD -MP -MF $(DEPDIR)/dsh-json.Tpo -c -o dsh-json.o `test -f 'json.c' || echo '$(srcdir)/'`json.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/dsh-json.Tpo $(DEPDIR)/dsh-json.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='json.c' object='dsh-json.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dsh_CFLAGS) $(CFLAGS) -c -o dsh-json.o `test -f 'json.c' || echo '$(srcdir)/'`json.c
+
+dsh-json.obj: json.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dsh_CFLAGS) $(CFLAGS) -MT dsh-json.obj -MD -MP -MF $(DEPDIR)/dsh-json.Tpo -c -o dsh-json.obj `if test -f 'json.c'; then $(CYGPATH_W) 'json.c'; else $(CYGPATH_W) '$(srcdir)/json.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/dsh-json.Tpo $(DEPDIR)/dsh-json.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='json.c' object='dsh-json.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(dsh_CFLAGS) $(CFLAGS) -c -o dsh-json.obj `if test -f 'json.c'; then $(CYGPATH_W) 'json.c'; else $(CYGPATH_W) '$(srcdir)/json.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -1563,6 +1578,7 @@ clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
 distclean: distclean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f ./$(DEPDIR)/dsh-dsh.Po
+	-rm -f ./$(DEPDIR)/dsh-json.Po
 	-rm -f ./$(DEPDIR)/dsh-linkedlist.Po
 	-rm -f ./$(DEPDIR)/dsh-parameter.Po
 	-rm -f Makefile
@@ -1613,6 +1629,7 @@ maintainer-clean: maintainer-clean-recursive
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f ./$(DEPDIR)/dsh-dsh.Po
+	-rm -f ./$(DEPDIR)/dsh-json.Po
 	-rm -f ./$(DEPDIR)/dsh-linkedlist.Po
 	-rm -f ./$(DEPDIR)/dsh-parameter.Po
 	-rm -f Makefile
